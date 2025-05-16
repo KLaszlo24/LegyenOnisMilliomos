@@ -19,7 +19,7 @@ namespace Milliomos
 			return new Kerdes
 			{
 				Szoveg = reszek[1],
-				Valaszok = reszek.Skip(2).Take(4).ToList(),
+				Valaszok = reszek.Skip(2).Take(4).ToList(),   //Itt történt javítás mert elszámoltam, mivel volt az elején szám a txtben :(
 				HelyesValasz = reszek[6],
 				Kategoria = reszek[7]
 

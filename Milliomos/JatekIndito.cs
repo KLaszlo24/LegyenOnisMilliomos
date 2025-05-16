@@ -62,6 +62,16 @@ namespace Milliomos
 
 
                 //Beolvasas és a nyereményes játék kész commit
+
+                if (segitsegek.Count > 0)
+                {
+                    Console.WriteLine("Használható segítségek: " + string.Join(",", segitsegek));
+                }
+
+                Console.WriteLine("A helyes válasz megadása vagy segítség használata: ");
+                string valaszbeolvasas = Console.ReadLine().ToLower();
+
+                //Válasz megadása commit
             }
         }
     }
