@@ -43,6 +43,26 @@ namespace Milliomos
             }
 
             //A sorkérdések játék commit
+
+
+
+
+            //Sima kérdések fognak majd innen kezdődni
+
+            kerdesek.Betoltes("kerdes.txt");
+            while (AktualSzint!=nyeremeny.Length)
+            {
+                Console.WriteLine($"\n{AktualSzint + 1}. kérdés és a nyeremény: {nyeremeny[AktualSzint]} Ft.");
+                var kerdes = kerdesek.Random();
+                var valasz = kerdesek.Random();
+                Console.WriteLine("TÉTRE menő kérdések:");
+                Console.WriteLine(kerdes.Szoveg);
+                Console.WriteLine("A " + valasz.Valaszok[0] + "B " + valasz.Valaszok[1]);
+                Console.WriteLine("C " + valasz.Valaszok[2] + "D " + valasz.Valaszok[3]);
+
+
+                //Beolvasas és a nyereményes játék kész commit
+            }
         }
     }
 }

@@ -18,10 +18,10 @@ namespace Milliomos
 			var reszek = sor.Split(';');
 			return new Kerdes
 			{
-				Szoveg = reszek[0],
-				Valaszok = reszek.Skip(1).Take(4).ToList(),
-				HelyesValasz = reszek[5],
-				Kategoria = reszek[6]
+				Szoveg = reszek[1],
+				Valaszok = reszek.Skip(2).Take(4).ToList(),
+				HelyesValasz = reszek[6],
+				Kategoria = reszek[7]
 
 			};
 		}
