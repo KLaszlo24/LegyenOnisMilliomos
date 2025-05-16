@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,26 @@ namespace Milliomos
                 sorkerdesek.Add(Sorkerdes.Szetszed(sor));
             }
             //Sorkerdesek beolvasasa commit
+
+            Random rand= new Random();
+            int index = rand.Next(sorkerdesek.Count);
+            Sorkerdes sorok= sorkerdesek[index];
+
+            Console.WriteLine("A játék kezdete");
+            Console.WriteLine("SORKÉRDÉS következik:");
+            Console.WriteLine(sorok.Kerdes);
+            Console.WriteLine("A " + sorok.Valaszok[0] + "B " + sorok.Valaszok[1]);
+            Console.WriteLine("C " + sorok.Valaszok[2] + "D " + sorok.Valaszok[3]);
+            Console.WriteLine("A helyes sorrend megadása: ");
+            string valasza=Console.ReadLine().ToUpper();
+
+            if (valasza != sorok.HelyesRend)
+            {
+                Console.WriteLine("Számára sajnos véget ért a játék!");
+                return;
+            }
+
+            //A sorkérdések játék commit
         }
     }
 }
