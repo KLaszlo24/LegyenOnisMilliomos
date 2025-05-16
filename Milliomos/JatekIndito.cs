@@ -31,9 +31,9 @@ namespace Milliomos
             Console.WriteLine("A játék kezdete");
             Console.WriteLine("SORKÉRDÉS következik:");
             Console.WriteLine(sorok.Kerdes);
-            Console.WriteLine("A " + sorok.Valaszok[0] + "B " + sorok.Valaszok[1]);
-            Console.WriteLine("C " + sorok.Valaszok[2] + "D " + sorok.Valaszok[3]);
-            Console.WriteLine("A helyes sorrend megadása: ");
+            Console.WriteLine("A: " + sorok.Valaszok[0] + " B: " + sorok.Valaszok[1]);
+            Console.WriteLine("C: " + sorok.Valaszok[2] + " D: " + sorok.Valaszok[3]);
+            Console.Write("A helyes sorrend megadása: ");
             string valasza=Console.ReadLine().ToUpper();
 
             if (valasza != sorok.HelyesRend)
@@ -53,12 +53,11 @@ namespace Milliomos
             while (AktualSzint!=nyeremeny.Length)
             {
                 Console.WriteLine($"\n{AktualSzint + 1}. kérdés és a nyeremény: {nyeremeny[AktualSzint]} Ft.");
-                var kerdes = kerdesek.Random();
-                var valasz = kerdesek.Random();
+                var randomkv = kerdesek.Random();
                 Console.WriteLine("TÉTRE menő kérdések:");
-                Console.WriteLine(kerdes.Szoveg);
-                Console.WriteLine("A " + valasz.Valaszok[0] + "B " + valasz.Valaszok[1]);
-                Console.WriteLine("C " + valasz.Valaszok[2] + "D " + valasz.Valaszok[3]);
+                Console.WriteLine(randomkv.Szoveg);
+                Console.WriteLine("A: " + randomkv.Valaszok[0] + " B: " + randomkv.Valaszok[1]);
+                Console.WriteLine("C: " + randomkv.Valaszok[2] + " D: " + randomkv.Valaszok[3]);
 
 
                 //Beolvasas és a nyereményes játék kész commit
@@ -68,11 +67,39 @@ namespace Milliomos
                     Console.WriteLine("Használható segítségek: " + string.Join(",", segitsegek));
                 }
 
-                Console.WriteLine("A helyes válasz megadása vagy segítség használata: ");
+                Console.Write("A helyes válasz megadása vagy segítség használata: ");
                 string valaszbeolvasas = Console.ReadLine().ToLower();
 
                 //Válasz megadása commit
+
+
+
+                //if (segitsegek.Contains(valaszbeolvasas))
+                //{
+                //    Felhasznalas(valaszbeolvasas, );
+                //    segitsegek.(valaszbeolvasas); itt valahogy törölni kéne
+                //}
+
+                if (valaszbeolvasas.ToUpper() != randomkv.HelyesValasz)
+                {
+                    Console.WriteLine("Helytelen a válasz");
+                    Console.WriteLine($"A helyes válasz ez lett volna: {randomkv.HelyesValasz}");
+                    Console.WriteLine($"Az elért nyereményed: {(AktualSzint>0? nyeremeny[AktualSzint-1]:0)} Ft");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Helyes a válasza! Mehetünk a következő kérdésre.");
+                    AktualSzint++;
+                }
             }
+
+            Console.WriteLine("Gratulálok az Ön nyereménye 50000000Ft!!!!!!");
+
+            /*Mára a feladatam vége, majd még a segítségeknek kell megcsinálnom a metódust amit már ott fönt
+            kommentben elkezdtem "Felhasznalas" néven. Azt még pontosan nem tudom hogyan kéne, de majd utánajárok,
+            meg aztán színekkel kell majd még formázni. Ezen kívűl viszont működik a játék ahogyan én láttam,
+            meg visszamenőleg csináltam pár stílusváltoztatást */
         }
     }
 }
