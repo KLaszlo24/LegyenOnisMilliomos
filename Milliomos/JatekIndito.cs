@@ -204,9 +204,49 @@ namespace Milliomos
                 int index=valaszBetuei.IndexOf(betu);
                 string szoveg = kerd.Valaszok[index];
 
-                Console.WriteLine("- "+ betu + ": " + szazalek + "(" + szoveg + ") %" );
+                Console.WriteLine("- "+ betu + ": " + szazalek + "(" + szoveg + "% )" );
+
+                //Itt volt a felezo es kozonseg commit
 
             }
         }
+
+        private void Telefon(Kerdes kerd)
+        {
+			string valaszBetuei = "ABCD";
+			Random veletlen = new Random();
+			string helyesBetu = kerd.HelyesValasz;
+
+			int helyesValaszi = valaszBetuei.IndexOf(helyesBetu);
+
+			List<int> rosszvalaszok = new List<int>() { 0, 1, 2, 3 };
+			rosszvalaszok.Remove(helyesValaszi);
+
+            int VeletelenRossz = rosszvalaszok[veletlen.Next(rosszvalaszok.Count)];
+
+            bool helyeseTöbb=veletlen.Next(2) == 0;
+
+            int helyesSzazalek;
+            int rosszSzazalek;
+
+            if (helyeseTöbb)
+            {
+				helyesSzazalek = veletlen.Next(40, 55);
+                rosszSzazalek = 100 - helyesSzazalek;
+
+			}
+            else
+            {
+                helyesSzazalek = veletlen.Next(20, 30);
+				rosszSzazalek = 100 - helyesSzazalek;
+			}
+
+            Console.WriteLine("Telefonos segítség használva lett: ");
+
+            Console.WriteLine("- " + valaszBetuei[helyesValaszi] + ": " + helyesSzazalek + " (" + kerd.Valaszok[helyesValaszi] + "% )");
+			Console.WriteLine("- " + valaszBetuei[VeletelenRossz] + ": " + rosszSzazalek + " (" + kerd.Valaszok[VeletelenRossz] + "% )");
+
+            //Telefonos vége commit
+		}
 	}
 }
