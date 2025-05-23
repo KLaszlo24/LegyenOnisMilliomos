@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace Milliomos
 {
+    public class ValaszSzavazat{
+		public char Betu;
+		public int Szazalek;
+	}
     internal class JatekIndito
     {
+        
+        private Random random=new Random();
         private Kerdesek kerdesek = new Kerdesek();
         private List<string> segitsegek = new() { "kozonseg", "telefon", "felezo" };
         private int AktualSzint = 0;
@@ -74,11 +80,11 @@ namespace Milliomos
 
 
 
-                //if (segitsegek.Contains(valaszbeolvasas))
-                //{
-                //    Felhasznalas(valaszbeolvasas, );
-                //    segitsegek.(valaszbeolvasas); itt valahogy törölni kéne
-                //}
+                if (segitsegek.Contains(valaszbeolvasas))
+                {
+                    //Felhasznalas(valaszbeolvasas, );
+                    segitsegek.Remove(valaszbeolvasas);
+                }
 
                 if (valaszbeolvasas.ToUpper() != randomkv.HelyesValasz)
                 {
@@ -100,6 +106,107 @@ namespace Milliomos
             kommentben elkezdtem "Felhasznalas" néven. Azt még pontosan nem tudom hogyan kéne, de majd utánajárok,
             meg aztán színekkel kell majd még formázni. Ezen kívűl viszont működik a játék ahogyan én láttam,
             meg visszamenőleg csináltam pár stílusváltoztatást */
+
+            
         }
-    }
+
+		private void Felezo(Kerdes kerd)
+		{
+            string valaszBetuei = "ABCD";
+            string helyesBetu= kerd.HelyesValasz;
+
+            int helyesValasz=valaszBetuei.IndexOf(helyesBetu);
+
+            List<int>rosszvalaszok = new List<int>() { 0, 1, 2, 3 };
+            rosszvalaszok.Remove(helyesValasz);
+            
+
+            int Randomi=random.Next(rosszvalaszok.Count);
+            int kivalasztottRossz=rosszvalaszok[Randomi];
+
+            Console.WriteLine("Felező felhasználva");
+
+            string helyesSzoveg = kerd.Valaszok[helyesValasz];
+            string rosszBetu = valaszBetuei[kivalasztottRossz].ToString();
+            string rosszSzoveg = kerd.Valaszok[kivalasztottRossz];
+
+            Console.WriteLine("Megmaradt választási opciók:");
+            Console.WriteLine($"{helyesBetu}: {helyesSzoveg}");
+            Console.WriteLine($"{rosszBetu}: {rosszSzoveg}");
+
+        }
+
+        private void Kozonseg(Kerdes kerd)
+        {
+			string valaszBetuei = "ABCD";
+            Random veletlen=new Random();
+			string helyesBetu = kerd.HelyesValasz;
+
+			int helyesValaszi = valaszBetuei.IndexOf(helyesBetu);
+
+            int joszazalek=random.Next(30,50);
+
+            int maradekszazalek=100-joszazalek;
+
+            int[] rosszValszokSzazalek = new int[3];
+
+            int osszszazalek = 0;
+
+            for (int i = 0; i < 2; i++)
+            {
+                rosszValszokSzazalek[i] = veletlen.Next(0, maradekszazalek - osszszazalek);
+                osszszazalek+=rosszValszokSzazalek[i];
+            }
+
+			rosszValszokSzazalek[2]=maradekszazalek-osszszazalek;
+
+            List<ValaszSzavazat> szavazatok = new List<ValaszSzavazat>();
+
+            int rosszszazaleki = 0;
+
+			for (int i = 0;i < valaszBetuei.Length;i++)
+            {
+                ValaszSzavazat szavazat = new ValaszSzavazat();
+                szavazat.Betu=valaszBetuei[i];
+
+                if (i == helyesValaszi)
+                {
+                    szavazat.Szazalek = joszazalek;
+                }
+                else
+                {
+                    szavazat.Szazalek = rosszValszokSzazalek[rosszszazaleki];
+                    rosszszazaleki++;
+                }
+
+                szavazatok.Add(szavazat);
+            }
+
+            for (int i = 0; i<szavazatok.Count;i++)
+            {
+                for (int j = i+1; j<szavazatok.Count;j++)
+                {
+                    if(szavazatok[i].Szazalek <szavazatok [j].Szazalek)
+                    {
+                        ValaszSzavazat t = szavazatok[i];
+                        szavazatok[i] = szavazatok[j];
+                        szavazatok[j] = t;
+
+					}
+                }
+            }
+
+            Console.WriteLine("Közönség szavazata felhasználva: ");
+            for (int i = 0;i<szavazatok.Count; i++)
+            {
+                char betu = szavazatok[i].Betu;
+                int szazalek = szavazatok[i].Szazalek;
+                int index=valaszBetuei.IndexOf(betu);
+                string szoveg = kerd.Valaszok[index];
+
+                Console.WriteLine("- "+ betu + ": " + szazalek + "(" + szoveg + ") %" );
+
+            }
+        }
+	}
 }
