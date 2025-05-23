@@ -37,7 +37,7 @@ namespace Milliomos
             Console.WriteLine("A játék kezdete");
             Console.WriteLine("SORKÉRDÉS következik:");
             Console.WriteLine(sorok.Kerdes);
-            Console.WriteLine("A: " + sorok.Valaszok[0] + " B: " + sorok.Valaszok[1]);
+			Console.WriteLine("A: " + sorok.Valaszok[0] + " B: " + sorok.Valaszok[1]);
             Console.WriteLine("C: " + sorok.Valaszok[2] + " D: " + sorok.Valaszok[3]);
             Console.Write("A helyes sorrend megadása: ");
             string valasza=Console.ReadLine().ToUpper();
@@ -84,8 +84,9 @@ namespace Milliomos
                 {
                     Felhasznalas(valaszbeolvasas,randomkv );
                     segitsegek.Remove(valaszbeolvasas);
-                }
+                    continue;
 
+				} 
                 if (valaszbeolvasas.ToUpper() != randomkv.HelyesValasz)
                 {
                     Console.WriteLine("Helytelen a válasz");
