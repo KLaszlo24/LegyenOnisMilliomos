@@ -82,7 +82,7 @@ namespace Milliomos
 
                 if (segitsegek.Contains(valaszbeolvasas))
                 {
-                    //Felhasznalas(valaszbeolvasas, );
+                    Felhasznalas(valaszbeolvasas,randomkv );
                     segitsegek.Remove(valaszbeolvasas);
                 }
 
@@ -248,5 +248,23 @@ namespace Milliomos
 
             //Telefonos vége commit
 		}
+
+        private void Felhasznalas(string tipusa, Kerdes kerd)
+        {
+            switch (tipusa.ToLower())
+            {
+                case "felezo":
+                    Felezo(kerd); break;
+				case "kozonseg":
+                    Kozonseg(kerd); break;
+				case "telefon":
+                    Telefon(kerd); break;
+                default:
+                    Console.WriteLine("Ilyen segítség nincs!");
+                    break;
+
+                    //Segitseg felhasználás commit
+            }
+        }
 	}
 }
